@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using MvcCoreMultiplesBBDD.Data;
+using MvcCoreMultiplesBBDD.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string connectionString = builder.Configuration.GetConnectionString("SqlHospitalTajamar");
+builder.Services.AddTransient<IRepositoryEmpleados, SQLRepositoryEmpleados>();
+builder.Services.AddDbContext<HospitalContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
@@ -21,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Empleado}/{action=Index}/{id?}");
 
 app.Run();
