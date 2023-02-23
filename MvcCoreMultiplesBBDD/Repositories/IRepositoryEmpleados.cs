@@ -5,6 +5,7 @@ namespace MvcCoreMultiplesBBDD.Repositories {
 
         List<Empleado> GetEmpleados();
         Empleado FindEmpleado(int idEmpleado);
-
+        Task DeleteEmpleadoAsync(int idEmpleado);
+        Task UpdateEmpleado(int idEmpleado, int salario, string oficio);
     }
 }
